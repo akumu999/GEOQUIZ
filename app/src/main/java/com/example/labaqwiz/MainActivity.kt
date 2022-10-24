@@ -47,9 +47,11 @@ class MainActivity : AppCompatActivity() {
         quizViewModel.questionTextView = findViewById(R.id.question_text_view)
         quizViewModel.trueButton.setOnClickListener {
             checkAnswer(true)
+            quizViewModel.blockButton()
         }
         quizViewModel.falseButton .setOnClickListener {
             checkAnswer(false)
+            quizViewModel.blockButton()
         }
         quizViewModel.questionTextView.setOnClickListener {
             quizViewModel.moveToNext()
@@ -58,13 +60,14 @@ class MainActivity : AppCompatActivity() {
         quizViewModel.nextButton.setOnClickListener {
             quizViewModel.moveToNext()
             updateQuestion()
-            quizViewModel.lockButtons(true)
+            quizViewModel.trueButton.isEnabled=quizViewModel.buttonsAreBlocked[quizViewModel.currentIndex]
+            quizViewModel.falseButton.isEnabled=quizViewModel.buttonsAreBlocked[quizViewModel.currentIndex]
         }
         quizViewModel.prevButton.setOnClickListener {
             quizViewModel.moveToPrev()
-
             updateQuestion()
-            quizViewModel.lockButtons(false)
+            quizViewModel.trueButton.isEnabled=quizViewModel.buttonsAreBlocked[quizViewModel.currentIndex]
+            quizViewModel.falseButton.isEnabled=quizViewModel.buttonsAreBlocked[quizViewModel.currentIndex]
         }
         updateQuestion()
     }

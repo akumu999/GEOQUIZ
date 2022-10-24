@@ -30,7 +30,7 @@ class QuizViewModel : ViewModel() {
         Question(R.string.question_americas, true),
         Question(R.string.question_asia, true)
     )
-
+    var buttonsAreBlocked: Array<Boolean> = arrayOf( true, true, true, true, true, true)
     val currentQuestionBankSize: Int get()= questionBank.size
 
     val currentQuestionAnswer: Boolean get() =
@@ -58,5 +58,8 @@ class QuizViewModel : ViewModel() {
         nextButton.isEnabled = false
         prevButton.isEnabled = false
         questionTextView.isEnabled = false
+    }
+    fun blockButton() {
+        buttonsAreBlocked[currentIndex]=false
     }
 }
